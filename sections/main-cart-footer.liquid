@@ -38,7 +38,7 @@
         </cart-note>
       {%- endif -%}
 
-      {% render 'freilaender-cart-footer-extras', part: 'delivery' %}
+      {% render 'freilaender-cart-footer-extras', part: 'delivery', context: 'page' %}
 
       <div class="cart__blocks">
         {% for block in section.blocks %}

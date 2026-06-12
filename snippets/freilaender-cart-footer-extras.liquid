@@ -27,6 +27,24 @@
         Sie wünschen ein späteres Lieferdatum? Wählen Sie einen Wunschtermin ... <sup>(optional)</sup>
       </p>
     {% endunless %}
+
+    {%- liquid
+      assign show_bird_widget = false
+      if context == 'drawer' and template.name != 'cart'
+        assign show_bird_widget = true
+      elsif context != 'drawer' and template.name == 'cart'
+        assign show_bird_widget = true
+      endif
+    -%}
+
+    {% if show_bird_widget %}
+      <div
+        id="birdchime-slots-box"
+        {% if context == 'drawer' %}
+          data-watch-ajax="cart-drawer"
+        {% endif %}
+      ></div>
+    {% endif %}
   </div>
 {% endunless %}
 
