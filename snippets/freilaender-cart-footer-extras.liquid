@@ -38,17 +38,18 @@
 
       <details id="{{ delivery_accordion_id }}" class="freilaender-delivery-accordion">
         <summary>
-          <span class="summary__title freilaender-cart-delivery-summary">
-            <span class="freilaender-cart-delivery-summary__text">
-              {% render 'freilaender-cart-delivery-label' %}
-            </span>
-            <span class="freilaender-cart-delivery-summary__icon">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
+          <span class="summary__title">
+            Wunschlieferdatum (optional)
+            {{- 'icon-caret.svg' | inline_asset_content -}}
           </span>
         </summary>
 
         <div class="freilaender-delivery-accordion__content">
+          <p class="freilaender-cart-footer-extras__text">
+            Wir versenden täglich von Dienstag bis Freitag, damit Sie Ihre Ware schnellstmöglich erhalten.
+            Sie wünschen ein späteres Lieferdatum? Wählen Sie einen Wunschtermin ... <sup>(optional)</sup>
+          </p>
+
           {% if show_bird_widget %}
             <div
               id="birdchime-slots-box"
@@ -86,9 +87,8 @@
     .freilaender-delivery-accordion summary {
       display: flex;
       position: relative;
-      line-height: 1.5;
-      align-items: flex-start;
-      padding: 1.2rem 2.8rem 1.2rem 0;
+      line-height: 1;
+      padding: 1.5rem 2.8rem 1.5rem 0;
       cursor: pointer;
       list-style: none;
     }
@@ -97,25 +97,16 @@
       display: none;
     }
 
-    .freilaender-cart-delivery-summary {
+    .freilaender-delivery-accordion .summary__title {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 1rem;
       width: 100%;
+      font-size: 1.4rem;
+      font-weight: 600;
     }
 
-    .freilaender-cart-delivery-summary__text {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .freilaender-cart-delivery-summary__icon {
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-    }
-
-    .freilaender-cart-delivery-summary__icon .icon-caret {
+    .freilaender-delivery-accordion .summary__title .icon-caret {
       height: 0.6rem;
       transition: transform var(--duration-short) ease;
     }
@@ -124,31 +115,18 @@
       transform: rotate(180deg);
     }
 
-    .freilaender-cart-delivery-label {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-
-    .freilaender-cart-delivery-label__title {
-      font-size: 1.4rem;
-      font-weight: 600;
-      line-height: 1.4;
-    }
-
-    .freilaender-cart-delivery-label__hint {
-      font-size: 1.2rem;
-      line-height: 1.5;
-      font-weight: 400;
-      color: rgba(var(--color-foreground), 0.65);
-    }
-
     .freilaender-delivery-accordion[open] {
       padding-bottom: 1.5rem;
     }
 
     .freilaender-delivery-accordion__content {
       padding-top: 0.25rem;
+    }
+
+    .freilaender-cart-footer-extras__text {
+      font-size: 14px;
+      margin: 0 0 1rem;
+      line-height: 1.5;
     }
   </style>
 {% endif %}

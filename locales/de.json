@@ -305,9 +305,7 @@
       "taxes_at_checkout_shipping_at_checkout_with_policy_html": "Steuern, Rabatte und <a href=\"{{ link }}\">Versand</a> werden beim Checkout berechnet.",
       "taxes_at_checkout_shipping_at_checkout_without_policy": "Steuern, Rabatte und Versand werden beim Checkout berechnet.",
       "note_title": "Hinweise für deine Bestellung",
-      "note_hint": "Keine Zustellhinweise – diese können bei der Lieferadresse eingegeben werden.",
-      "delivery_title": "Wunschlieferdatum (optional)",
-      "delivery_hint": "Versand Di–Fr, späterer Termin auf Wunsch möglich"
+      "note_hint": "Keine Zustellhinweise – diese können bei der Lieferadresse eingegeben werden."
     },
     "footer": {
       "payment": "Zahlungsmethoden"

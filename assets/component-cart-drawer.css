@@ -225,29 +225,6 @@ cart-drawer-items.is-empty + .drawer__footer {
   color: rgba(var(--color-foreground), 0.65);
 }
 
-.drawer__footer-body .freilaender-delivery-accordion summary {
-  line-height: 1.5;
-  align-items: flex-start;
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
-}
-
-.freilaender-cart-delivery-summary {
-  align-items: flex-start;
-  gap: 1rem;
-  width: 100%;
-}
-
-.freilaender-cart-delivery-summary__text {
-  flex: 1;
-  min-width: 0;
-}
-
-.freilaender-cart-delivery-summary__icon {
-  flex-shrink: 0;
-  margin-top: 0.2rem;
-}
-
 #Details-CartDrawer .summary__title {
   line-height: 1.5;
   align-items: flex-start;
