@@ -48,6 +48,31 @@ class CartDrawer extends HTMLElement {
 
     document.body.classList.add('overflow-hidden', 'cart-drawer-open');
     document.dispatchEvent(new CustomEvent('cart-drawer:opened'));
+    this.setupBirdDeliveryListeners();
+    this.nudgeBirdDeliveryWidget();
+  }
+
+  setupBirdDeliveryListeners() {
+    this.querySelectorAll('.freilaender-delivery-accordion').forEach((details) => {
+      if (details.dataset.birdToggleInit === 'true') return;
+
+      details.dataset.birdToggleInit = 'true';
+      details.addEventListener('toggle', () => {
+        if (details.open) this.nudgeBirdDeliveryWidget();
+      });
+    });
+  }
+
+  nudgeBirdDeliveryWidget() {
+    if (this._birdNudgeTimeout) window.clearTimeout(this._birdNudgeTimeout);
+
+    this._birdNudgeTimeout = window.setTimeout(() => {
+      const box = this.querySelector('#birdchime-slots-box');
+      if (!box || box.childElementCount > 0) return;
+
+      const replacement = box.cloneNode(true);
+      box.replaceWith(replacement);
+    }, 400);
   }
 
   close() {
@@ -86,6 +111,7 @@ class CartDrawer extends HTMLElement {
 
     setTimeout(() => {
       this.querySelector('#CartDrawer-Overlay').addEventListener('click', this.close.bind(this));
+      this.setupBirdDeliveryListeners();
       this.open();
     });
   }
