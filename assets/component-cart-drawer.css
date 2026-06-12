@@ -377,7 +377,7 @@ cart-drawer-items {
   display: block;
   box-sizing: border-box;
   width: 100%;
-  margin: 1rem 0 0;
+  margin: 1rem 0 1.5rem;
   padding: 1.2rem 1.4rem;
   border: 0.1rem solid rgba(var(--color-foreground), 0.15);
   border-radius: 0.4rem;
