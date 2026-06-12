@@ -16,8 +16,13 @@
 -%}
 
 {%- if cross_sell_count > 0 -%}
-  <div class="freilaender-cart-cross-sell{% if context == 'drawer' %} freilaender-cart-cross-sell--drawer{% endif %}">
-    <h3 class="freilaender-cart-cross-sell__title">Das könnte dir auch gefallen</h3>
+  <details class="freilaender-cart-cross-sell freilaender-cart-cross-sell--drawer freilaender-cart-cross-sell--collapsible">
+    <summary class="freilaender-cart-cross-sell__title">
+      <span>Das könnte dir auch gefallen</span>
+      <span class="freilaender-cart-cross-sell__icon">
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </span>
+    </summary>
 
     <ul class="freilaender-cart-cross-sell__grid" role="list">
       {%- for handle in cross_sell_handles -%}
@@ -43,5 +48,5 @@
         {%- endif -%}
       {%- endfor -%}
     </ul>
-  </div>
+  </details>
 {%- endif -%}
