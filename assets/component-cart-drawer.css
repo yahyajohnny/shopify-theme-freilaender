@@ -80,6 +80,10 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   margin: 0 0 1rem;
 }
 
+.freilaender-cart-banner--drawer {
+  flex-shrink: 0;
+}
+
 .drawer__close {
   display: inline-block;
   padding: 0;

@@ -74,6 +74,7 @@
           </span>
         </button>
       </div>
+      {% render 'freilaender-cart-banner', context: 'drawer' %}
       <cart-drawer-items
         {% if cart == empty %}
           class=" is-empty"
@@ -446,7 +447,6 @@
                 </table>
               </div>
             {%- endif -%}
-            {% render 'freilaender-cart-banner', context: 'drawer' %}
             <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
             <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
               {{ 'accessibility.loading' | t }}
