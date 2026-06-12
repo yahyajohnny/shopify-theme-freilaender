@@ -27,13 +27,13 @@
       {%- if settings.show_cart_note -%}
         <cart-note class="cart__note field">
 
-          <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
+          <label for="Cart-note">{% render 'freilaender-cart-note-label' %}</label>
           <textarea
             class="text-area field__input"
             name="note"
             form="cart"
             id="Cart-note"
-            placeholder="{{ 'sections.cart.note' | t }}"
+            placeholder="{{ 'sections.cart.note_title' | t }}"
           >{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}

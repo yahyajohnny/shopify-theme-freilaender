@@ -3652,3 +3652,13 @@ body.cart-drawer-open iframe[src*="inbox"] {
   display: block;
   margin-bottom: 0.75rem;
 }
+
+.cart__footer .freilaender-cart-note-label__title {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.cart__footer .freilaender-cart-note-label__hint {
+  font-size: 1.2rem;
+  color: rgba(var(--color-foreground), 0.65);
+}

@@ -272,7 +272,6 @@
       "announcement": "Announcement",
       "announcement_bar": "Announcement bar"
     },
-
     "header": {
       "announcement": "Announcement",
       "menu": "Menu",
@@ -311,7 +310,9 @@
       "login": {
         "title": "Have an account?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
-      }
+      },
+      "note_title": "Order special instructions",
+      "note_hint": "No delivery notes here – you can add them at the shipping address."
     },
     "footer": {
       "payment": "Payment methods"

@@ -459,18 +459,24 @@
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
             <summary>
-              <span class="summary__title">
-                {{ 'sections.cart.note' | t }}
-                {{- 'icon-caret.svg' | inline_asset_content -}}
+              <span class="summary__title freilaender-cart-note-summary">
+                <span class="freilaender-cart-note-summary__text">
+                  {% render 'freilaender-cart-note-label' %}
+                </span>
+                <span class="freilaender-cart-note-summary__icon">
+                  {{- 'icon-caret.svg' | inline_asset_content -}}
+                </span>
               </span>
             </summary>
             <cart-note class="cart__note field">
-              <label class="visually-hidden" for="CartDrawer-Note">{{ 'sections.cart.note' | t }}</label>
+              <label class="visually-hidden" for="CartDrawer-Note">
+                {{ 'sections.cart.note_title' | t }} — {{ 'sections.cart.note_hint' | t }}
+              </label>
               <textarea
                 id="CartDrawer-Note"
                 class="text-area text-area--resize-vertical field__input"
                 name="note"
-                placeholder="{{ 'sections.cart.note' | t }}"
+                placeholder="{{ 'sections.cart.note_title' | t }}"
               >{{ cart.note }}</textarea>
             </cart-note>
           </details>
