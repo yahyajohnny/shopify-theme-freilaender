@@ -3630,3 +3630,17 @@ details-disclosure > details {
   z-index: 5 !important;
 }
 
+/* Shopify Inbox Live-Chat ausblenden, wenn Warenkorb-Drawer offen ist */
+body.cart-drawer-open shopify-chat,
+body.cart-drawer-open #shopify-chat,
+body.cart-drawer-open #ShopifyChat,
+body.cart-drawer-open #shopify-chat-root,
+body.cart-drawer-open [id*="shopify-chat"],
+body.cart-drawer-open [id*="ShopifyChat"],
+body.cart-drawer-open iframe[title*="chat" i],
+body.cart-drawer-open iframe[src*="inbox"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
