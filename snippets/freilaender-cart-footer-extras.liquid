@@ -29,26 +29,42 @@
       endif
     -%}
 
-    <div class="delivery_date_picker_container freilaender-delivery-accordion-wrapper">
+    <div class="delivery_date_picker_container freilaender-delivery-accordion-wrapper{% if context == 'drawer' %} freilaender-delivery-accordion-wrapper--drawer{% endif %}">
       <style>
         .bcdp-methods-container {
           display: none;
         }
       </style>
 
-      <details id="{{ delivery_accordion_id }}" class="freilaender-delivery-accordion">
+      <details id="{{ delivery_accordion_id }}" class="freilaender-delivery-accordion{% if context == 'drawer' %} freilaender-cart-option-card{% else %} freilaender-cart-option-card freilaender-cart-option-card--page{% endif %}">
         <summary>
-          <span class="summary__title">
-            Wunschlieferdatum (optional)
-            {{- 'icon-caret.svg' | inline_asset_content -}}
-          </span>
+          {% if context == 'drawer' %}
+            <span class="summary__title freilaender-cart-delivery-summary">
+              <span class="freilaender-cart-delivery-summary__text">
+                <span class="freilaender-cart-option-card__label">
+                  <span class="freilaender-cart-option-card__title">Wunschlieferdatum (optional)</span>
+                  <span class="freilaender-cart-option-card__hint">Versand Di–Fr, späterer Termin möglich</span>
+                </span>
+              </span>
+              <span class="freilaender-cart-delivery-summary__icon">
+                {{- 'icon-caret.svg' | inline_asset_content -}}
+              </span>
+            </span>
+          {% else %}
+            <span class="summary__title">
+              Wunschlieferdatum (optional)
+              {{- 'icon-caret.svg' | inline_asset_content -}}
+            </span>
+          {% endif %}
         </summary>
 
         <div class="freilaender-delivery-accordion__content">
-          <p class="freilaender-cart-footer-extras__text">
-            Wir versenden täglich von Dienstag bis Freitag, damit Sie Ihre Ware schnellstmöglich erhalten.
-            Sie wünschen ein späteres Lieferdatum? Wählen Sie einen Wunschtermin ... <sup>(optional)</sup>
-          </p>
+          {% unless context == 'drawer' %}
+            <p class="freilaender-cart-footer-extras__text">
+              Wir versenden täglich von Dienstag bis Freitag, damit Sie Ihre Ware schnellstmöglich erhalten.
+              Sie wünschen ein späteres Lieferdatum? Wählen Sie einen Wunschtermin ... <sup>(optional)</sup>
+            </p>
+          {% endunless %}
 
           {% if show_bird_widget %}
             <div

@@ -24,21 +24,24 @@
 >
   <div class="page-width">
     <div class="cart__footer isolate section-{{ section.id }}-padding">
-      {%- if settings.show_cart_note -%}
-        <cart-note class="cart__note field">
+      <div class="freilaender-cart-options freilaender-cart-options--page">
+        {%- if settings.show_cart_note -%}
+          <div class="freilaender-cart-option-card freilaender-cart-option-card--page">
+            <cart-note class="cart__note field">
+              <label for="Cart-note">{% render 'freilaender-cart-note-label' %}</label>
+              <textarea
+                class="text-area field__input"
+                name="note"
+                form="cart"
+                id="Cart-note"
+                placeholder="{{ 'sections.cart.note_title' | t }}"
+              >{{ cart.note }}</textarea>
+            </cart-note>
+          </div>
+        {%- endif -%}
 
-          <label for="Cart-note">{% render 'freilaender-cart-note-label' %}</label>
-          <textarea
-            class="text-area field__input"
-            name="note"
-            form="cart"
-            id="Cart-note"
-            placeholder="{{ 'sections.cart.note_title' | t }}"
-          >{{ cart.note }}</textarea>
-        </cart-note>
-      {%- endif -%}
-
-      {% render 'freilaender-cart-footer-extras', part: 'delivery', context: 'page' %}
+        {% render 'freilaender-cart-footer-extras', part: 'delivery', context: 'page' %}
+      </div>
 
       <div class="cart__blocks">
         {% for block in section.blocks %}
