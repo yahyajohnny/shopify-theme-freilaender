@@ -203,19 +203,51 @@ cart-drawer-items.is-empty + .drawer__footer {
 .drawer__footer-body .freilaender-cart-option-card[open],
 .drawer__footer-body .freilaender-cart-option-card.freilaender-delivery-accordion[open] {
   padding-bottom: 0.8rem;
+  overflow: visible;
 }
 
-.drawer__footer-body .freilaender-cart-option-card .freilaender-delivery-accordion__content,
-.drawer__footer-body .freilaender-cart-option-card cart-note {
-  padding: 0 0.9rem 0.2rem;
+.drawer__footer-body .freilaender-cart-option-card .freilaender-cart-option-card__body,
+.drawer__footer-body .freilaender-cart-option-card .freilaender-delivery-accordion__content {
+  padding: 0 0.9rem 0.9rem;
 }
 
 .drawer__footer-body .freilaender-cart-option-card .freilaender-delivery-accordion__content {
   padding-top: 0;
 }
 
+.drawer__footer-body .freilaender-cart-option-card .cart__note {
+  position: static;
+  top: auto;
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.drawer__footer-body .freilaender-cart-option-card .cart__note::before,
+.drawer__footer-body .freilaender-cart-option-card .cart__note::after {
+  content: none;
+  display: none;
+}
+
+.drawer__footer-body .freilaender-cart-option-card .cart__note label {
+  position: static;
+  top: auto;
+  height: auto;
+  display: none;
+}
+
+.drawer__footer-body .freilaender-cart-option-card .cart__note .field__input,
 .drawer__footer-body .freilaender-cart-option-card .cart__note .text-area {
-  min-height: 6rem;
+  position: static;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 5.5rem;
+  margin: 0;
+  padding: 0.8rem 1rem;
+  resize: none;
+  border-radius: var(--inputs-radius);
+  border-bottom-right-radius: var(--inputs-radius);
 }
 
 .freilaender-cart-option-card__label {
