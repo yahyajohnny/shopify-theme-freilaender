@@ -48,17 +48,6 @@ class CartDrawer extends HTMLElement {
 
     document.body.classList.add('overflow-hidden', 'cart-drawer-open');
     document.dispatchEvent(new CustomEvent('cart-drawer:opened'));
-    this.reinitializeBirdDeliveryWidget();
-  }
-
-  reinitializeBirdDeliveryWidget() {
-    window.setTimeout(() => {
-      const box = this.querySelector('#birdchime-slots-box');
-      if (!box) return;
-
-      const replacement = box.cloneNode(true);
-      box.replaceWith(replacement);
-    }, 350);
   }
 
   close() {
