@@ -570,6 +570,35 @@ cart-drawer-items::-webkit-scrollbar-track-piece {
   margin-top: 0.2rem;
 }
 
+.freilaender-cart-cross-sell--drawer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+}
+
+.freilaender-cart-cross-sell__title {
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.freilaender-cart-cross-sell--drawer .freilaender-cart-cross-sell__slider {
+  margin: 0 -0.3rem;
+}
+
+.freilaender-cart-cross-sell--drawer .collection-list__item {
+  scroll-snap-align: start;
+}
+
+.freilaender-cart-cross-sell--drawer .card__heading {
+  font-size: 1.2rem;
+}
+
+.freilaender-cart-cross-sell--drawer .slider-buttons {
+  margin-top: 0.8rem;
+}
+
 @media screen and (min-width: 750px) {
   .cart-drawer .cart-item__quantity--info quantity-popover > * {
     padding-left: 0;
