@@ -1,65 +1,80 @@
-if (!customElements.get('go-express-consent')) {
-  customElements.define(
-    'go-express-consent',
-    class GoExpressConsent extends HTMLElement {
-      connectedCallback() {
-        this.consent = this.querySelector('input[name="attributes[go_express_zustimmung]"]');
-        if (!this.consent) return;
+(function () {
+  function getConsentRoot(input) {
+    return input.closest('.freilaender-go-express-consent');
+  }
 
-        this.hint = this.querySelector('.consent-inline-hint');
-        this.toast = document.getElementById(this.dataset.toastId);
-        this.form = document.getElementById(this.dataset.formId);
+  function updateHint(input) {
+    const root = getConsentRoot(input);
+    if (!root) return;
 
-        if (this.consent.dataset.bound === 'true') return;
-        this.consent.dataset.bound = 'true';
+    const hint = root.querySelector('.consent-inline-hint');
+    if (hint) hint.hidden = input.checked;
+    input.value = input.checked ? 'ja' : '';
+  }
 
-        this.consent.addEventListener('change', this.onChange.bind(this));
+  function persistConsent(input) {
+    if (typeof routes === 'undefined' || typeof fetchConfig !== 'function') return;
 
-        if (this.form) {
-          this.form.addEventListener('submit', this.onSubmit.bind(this));
-        }
+    const body = JSON.stringify({
+      attributes: {
+        go_express_zustimmung: input.checked ? 'ja' : '',
+      },
+    });
 
-        this.updateHint();
+    fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } });
+  }
+
+  function showToast(input, msg) {
+    const root = getConsentRoot(input);
+    if (!root) return;
+
+    const toast = document.getElementById(root.dataset.toastId);
+    if (!toast) return;
+
+    toast.textContent = msg;
+    toast.hidden = false;
+    clearTimeout(toast._freilaenderTimer);
+    toast._freilaenderTimer = setTimeout(() => {
+      toast.hidden = true;
+    }, 3000);
+  }
+
+  function initAll() {
+    document
+      .querySelectorAll('.freilaender-go-express-consent input[name="attributes[go_express_zustimmung]"]')
+      .forEach((input) => updateHint(input));
+  }
+
+  document.addEventListener('change', (event) => {
+    if (!event.target.matches('input[name="attributes[go_express_zustimmung]"]')) return;
+
+    event.stopPropagation();
+    updateHint(event.target);
+    persistConsent(event.target);
+  });
+
+  document.addEventListener(
+    'submit',
+    (event) => {
+      const form = event.target;
+      if (!form || (form.id !== 'cart' && form.id !== 'CartDrawer-Form')) return;
+
+      const consent =
+        form.querySelector('input[name="attributes[go_express_zustimmung]"]') ||
+        document.querySelector(`input[name="attributes[go_express_zustimmung]"][form="${form.id}"]`);
+
+      if (consent && !consent.checked) {
+        showToast(consent, 'Ohne Zustimmung gibt es keine Sendungsverfolgung.');
       }
-
-      onChange(event) {
-        event.stopPropagation();
-        this.updateHint();
-        this.persistConsent();
-      }
-
-      onSubmit() {
-        if (!this.consent.checked) {
-          this.showToast('Ohne Zustimmung gibt es keine Sendungsverfolgung.');
-        }
-      }
-
-      updateHint() {
-        if (this.hint) this.hint.hidden = this.consent.checked;
-        this.consent.value = this.consent.checked ? 'ja' : '';
-      }
-
-      persistConsent() {
-        if (typeof routes === 'undefined' || typeof fetchConfig !== 'function') return;
-
-        const body = JSON.stringify({
-          attributes: {
-            go_express_zustimmung: this.consent.checked ? 'ja' : '',
-          },
-        });
-
-        fetch(`${routes.cart_update_url}`, { ...fetchConfig(), ...{ body } });
-      }
-
-      showToast(msg) {
-        if (!this.toast) return;
-        this.toast.textContent = msg;
-        this.toast.hidden = false;
-        clearTimeout(this._toastTimer);
-        this._toastTimer = setTimeout(() => {
-          this.toast.hidden = true;
-        }, 3000);
-      }
-    }
+    },
+    true
   );
-}
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+
+  document.addEventListener('cart-drawer:opened', initAll);
+})();

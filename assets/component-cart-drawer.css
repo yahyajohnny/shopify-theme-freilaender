@@ -373,6 +373,78 @@ cart-drawer-items {
   max-width: none;
 }
 
+.drawer__footer .freilaender-go-express-consent {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 1rem 0 0;
+  padding: 1.2rem 1.4rem;
+  border: 0.1rem solid rgba(var(--color-foreground), 0.15);
+  border-radius: 0.4rem;
+  background-color: rgba(var(--color-foreground), 0.03);
+}
+
+.drawer__footer .freilaender-go-express-consent label {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  font-size: 1.3rem;
+  line-height: 1.5;
+  color: rgb(var(--color-foreground));
+  cursor: pointer;
+}
+
+.drawer__footer .freilaender-go-express-consent__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.drawer__footer .freilaender-go-express-consent input[type='checkbox'] {
+  appearance: none;
+  flex-shrink: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin: 0.15rem 0 0;
+  border: 0.15rem solid #0f2b0e;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+.drawer__footer .freilaender-go-express-consent input[type='checkbox']:checked {
+  background-color: #0f2b0e;
+  position: relative;
+}
+
+.drawer__footer .freilaender-go-express-consent input[type='checkbox']:checked::after {
+  content: '\2714';
+  font-size: 1.2rem;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.drawer__footer .freilaender-go-express-consent .consent-inline-hint {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  color: #8a1717;
+}
+
+.consent-toast {
+  position: fixed;
+  right: 1.6rem;
+  bottom: 1.6rem;
+  background: #0f2b0e;
+  color: #fff;
+  padding: 1rem 1.4rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.2);
+  font-size: 1.4rem;
+  z-index: 9999999;
+  max-width: 28rem;
+}
+
 .drawer__footer .cart__dynamic-checkout-buttons {
   max-width: 100%;
 }
