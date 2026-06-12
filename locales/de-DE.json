@@ -1,0 +1,87 @@
+{
+  "shopify": {
+    "checkout": {
+      "tips": {
+        "title": "Trinkgeld für den Fahrer",
+        "add_tip": "Trinkgeld hinzufügen",
+        "description": "Füge Trinkgeld für deinen Lieferfahrer hinzu",
+        "message": "  "
+      },
+      "general": {
+        "continue_to_shipping_method": "Weiter zu den Versandmethoden",
+        "back_to_shipping_method": "Zurück zur Versandmethode",
+        "edit_shipping_address": "Versandadresse bearbeiten",
+        "edit_shipping_method": "Versandmethode bearbeiten"
+      },
+      "review": {
+        "blocks": {
+          "shipping_address_title": "Liefern an"
+        }
+      },
+      "contact": {
+        "shipping_address_title": "Lieferadresse"
+      },
+      "delivery_options": {
+        "shipping_address": "Lieferadresse"
+      },
+      "order_summary": {
+        "free_shipping_discount_label": "Kostenloser Versand",
+        "discount_requires_customer_notice": "Bitte geben Sie Ihre Versandinformationen ein, um den Rabattcode {{code}} anzuwenden",
+        "shipping_information_does_not_meet_discount_requirements_notice": "Ihre Versandinformationen erfüllen nicht die Anforderungen des Rabattcodes {{code}}",
+        "shipping_label": "Versand"
+      },
+      "shipping": {
+        "shipping_method_title": " ",
+        "delivery_title": "Versand",
+        "waiting_on_rate_notice": "Bitte warten Sie, während wir verfügbare Versandtarife abrufen...",
+        "no_rates_for_cart_or_destination_notice": "Es sind keine Versandmethoden für Ihren Warenkorb oder Ihr Ziel verfügbar.",
+        "no_rates_for_country_notice": "Wir bieten keinen Versand nach {{country}} an.",
+        "please_enter_your_shipping_information_notice": "Bitte geben Sie Ihre Versandinformationen ein"
+      },
+      "payment": {
+        "same_billing_address_label": "Gleiche Rechnungsadresse"
+      },
+      "shipping_errors": {
+        "shipping_method": "Ihr Warenkorb wurde geändert, und die zuvor ausgewählte Versandrate gilt nicht mehr. Bitte wählen Sie eine neue Rate aus."
+      },
+      "thank_you": {
+        "shipping_information_title": "Versandinformationen",
+        "shipping_address_title": "Lieferadresse",
+        "shipping_method_title": "Versandmethode",
+        "marker": {
+          "shipping": "Lieferadresse",
+          "current": "Aktueller Lieferort"
+        },
+        "track_shipment": "Lieferung verfolgen",
+        "confirmed_description_html": "Wir haben Ihre Bestellung akzeptiert und bereiten sie vor. Eine Bestätigungs-E-Mail wurde an {{ email }} gesendet. Kommen Sie auf diese Seite zurück, um Updates zum Lieferstatus zu erhalten.",
+        "no_tracking_number": "Für diese Lieferung gibt es keine Sendungsverfolgungsnummer.",
+        "unfulfilled_items_title": "Vorbereitung der Lieferung",
+        "unfulfilled_items_description": "Wir bereiten derzeit diese Artikel für die Lieferung vor.",
+        "fulfillment": {
+          "unfulfilled_table_title": "Artikel in Vorbereitung für die Lieferung",
+          "fulfilled_table_title": "Artikel in dieser Lieferung"
+        },
+        "login_title": "Anmelden, um alle Lieferdetails anzuzeigen",
+        "failed_title": "Wir konnten Ihre Bestellung nicht liefern",
+        "delivered_description_html": "Ihre Bestellung wurde an die von Ihnen angegebene Adresse geliefert. Wenn Sie sie noch nicht erhalten haben oder andere Probleme auftreten, kontaktieren Sie uns bitte unter {{ contact_us }}.",
+        "delivered_title": "Ihre Bestellung wurde geliefert",
+        "attempted_delivery_description_html": "Es wurde ein Zustellungsversuch für Ihre Bestellung unternommen, der jedoch nicht erfolgreich war. Bitte kontaktieren Sie uns unter {{ contact_us }}, um einen erneuten Zustellungsversuch zu vereinbaren.",
+        "attempted_delivery_title": "Es wurde ein Zustellungsversuch für Ihre Bestellung unternommen",
+        "out_for_delivery_description_html": "Ihre Bestellung befindet sich auf dem Lieferwagen und wird heute erwartet. Wenn Sie sie in den nächsten 2 Tagen immer noch nicht erhalten haben, kontaktieren Sie uns bitte unter {{ contact_us }}.",
+        "out_for_delivery_title": "Ihre Bestellung ist unterwegs zur Zustellung",
+        "in_transit_description": "Kommen Sie auf diese Seite zurück, um Updates zum Lieferstatus zu erhalten.",
+        "in_transit_title": "Ihre Bestellung ist auf dem Weg",
+        "confirmed_title": "Ihre Lieferung ist bestätigt",
+        "order_updates_subscribe_to_email_notifications": "Erhalten Sie Lieferupdates per E-Mail",
+        "order_updates_subscribe_to_phone_notifications": "Erhalten Sie Lieferupdates per E-Mail oder SMS",
+        "order_updates_subscribe_to_email_or_phone_notifications": "Erhalten Sie Lieferupdates per SMS"
+      }
+    },
+    "notices": {
+      "cart": {
+        "shipping_address_not_required": "Dieser Warenkorb erfordert keine Lieferung",
+        "shipping_address_invalid": "Ungültige Lieferadresse"
+      }
+    }
+  }
+}

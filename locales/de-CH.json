@@ -1,0 +1,66 @@
+{
+  "shopify": {
+    "checkout": {
+      "contact": {
+        "phone_label": "Deine Telefonnummer",
+        "optional_phone_label": "Deine Telefonnummer (optional)",
+        "phone_placeholder": "Deine Telefonnummer",
+        "optional_phone_placeholder": "Deine Telefonnummer (optional)",
+        "shipping_address_title": "Abholadresse",
+        "first_name_label": "Dein Vorname",
+        "optional_first_name_label": "Dein Vorname (optional)",
+        "first_name_placeholder": "Dein Vorname",
+        "optional_first_name_placeholder": "Dein Vorname (optional)",
+        "last_name_label": "Dein Nachname",
+        "optional_last_name_label": "Dein Nachname (optional)",
+        "last_name_placeholder": "Dein Nachname",
+        "optional_last_name_placeholder": "Dein Nachname (optional)"
+      },
+      "delivery_options": {
+        "shipping_address": "Abholadresse",
+        "pick_up_in_one_hour": " ",
+        "pick_up_in_two_hours": " ",
+        "pick_up_in_four_hours": " ",
+        "pick_up_in_twenty_four_hours": " ",
+        "pick_up_in_two_to_four_days": " ",
+        "pick_up_in_five_or_more_days": " ",
+        "pick_up_in_zero_to_two_hours": " ",
+        "pick_up_in_two_to_four_hours": " ",
+        "pick_up_immediately": " ",
+        "pick_up_next_day": " "
+      },
+      "thank_you": {
+        "marker": {
+          "shipping": "Abholadresse",
+          "current": "Abholadresse"
+        },
+        "shipping_address_title": "Abholadresse",
+        "order_updates_subscribe_to_email_notifications": "Erhalte Abholupdates per E-Mail",
+        "order_updates_subscribe_to_phone_notifications": "Erhalte Abholupdates per E-Mail oder SMS",
+        "order_updates_subscribe_to_email_or_phone_notifications": "Erhalte Abholupdates per SMS"
+      },
+      "general": {
+        "continue_to_shipping_method": "Weiter",
+        "back_to_shipping_method": "Zurück",
+        "edit_shipping_address": "Bearbeiten",
+        "edit_shipping_method": "Bearbeiten"
+      },
+      "order_summary": {
+        "free_shipping_discount_label": "Kostenlose Abholung",
+        "shipping_label": "Abholung im Geschäft"
+      },
+      "shipping": {
+        "delivery_title": "Abholadresse",
+        "shipping_method_title": "Abholmethode",
+        "waiting_on_rate_notice": "Bitte warten, während wir verfügbare Abholraten abrufen...",
+        "no_rates_for_cart_or_destination_notice": "Abholung ist für deinen Warenkorb oder dein Ziel nicht verfügbar.",
+        "no_rates_for_country_notice": "Wir bieten keine Abholungen in {{ country }} an.",
+        "please_enter_your_shipping_information_notice": "Bitte gehe zurück zur Einkaufswagen-Seite und wähle einen Abholort aus."
+      },
+      "payment": {
+        "same_billing_address_label": "Bitte benutze die Option unten ⬇"
+      },
+      "shipping_title": "Abholung im Geschäft"
+    }
+  }
+}
