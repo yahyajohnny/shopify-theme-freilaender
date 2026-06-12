@@ -3644,3 +3644,11 @@ body.cart-drawer-open iframe[src*="inbox"] {
   pointer-events: none !important;
   opacity: 0 !important;
 }
+
+.cart__footer .cart__note label {
+  line-height: 1.5;
+  height: auto;
+  position: static;
+  display: block;
+  margin-bottom: 0.75rem;
+}
