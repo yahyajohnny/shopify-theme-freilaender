@@ -103,6 +103,8 @@
         }
 
         eventConsole(eventName, eventData) {
+          if (!window.Shopify || !Shopify.designMode) return;
+
           const css1 = 'background: red; color: #fff; font-size: normal; border-radius: 3px 0 0 3px; padding: 3px 4px;';
           const css2 = 'background-color: blue; color: #fff; font-size: normal; border-radius: 0 3px 3px 0; padding: 3px 4px;';
           console.log('%cGTM DataLayer Event:%c' + eventName, css1, css2, eventData);
@@ -1102,7 +1104,9 @@
         try{
           new Ultimate_Shopify_DataLayer();
         }catch(error) {
-          console.log(error);
+          if (window.Shopify && Shopify.designMode) {
+            console.error(error);
+          }
         }
       });
     
