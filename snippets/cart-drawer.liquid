@@ -446,6 +446,7 @@
                 </table>
               </div>
             {%- endif -%}
+            {% render 'freilaender-cart-banner', context: 'drawer' %}
             <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
             <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">
               {{ 'accessibility.loading' | t }}
@@ -474,6 +475,8 @@
             </cart-note>
           </details>
         {%- endif -%}
+
+        {% render 'freilaender-cart-footer-extras', part: 'delivery' %}
 
         <!-- Start blocks -->
         <!-- Subtotals -->
@@ -538,7 +541,8 @@
             {%- endif -%}
           </small>
         </div>
-        
+
+        {% render 'freilaender-cart-footer-extras', part: 'shipping-bar' %}
 
         <!-- CTAs -->
 

@@ -38,32 +38,7 @@
         </cart-note>
       {%- endif -%}
 
- {% assign has_festtags = false %}
-
-{% for item in cart.items %}
-  {% if item.product.tags contains 'Festtagsgeflügel' or item.product.tags contains "Freilandpute" %}
-    {% assign has_festtags = true %}
-    {% break %}
-  {% endif %}
-{% endfor %}
-
-<div class="delivery_date_picker_container">
-  <style>
-    .bcdp-methods-container {
-      display: none;
-    }
-  </style>
-
-  {% unless has_festtags %}
-    <h4>Wunschlieferdatum (optional)</h4>
-    <p style="font-size: 14px;">
-      Wir versenden täglich von Dienstag bis Freitag, damit Sie Ihre Ware schnellstmöglich erhalten.
-      Sie wünschen ein späteres Lieferdatum? Wählen Sie einen Wunschtermin ... <sup>(optional)</sup>
-    </p>
-  {% endunless %}
-</div>
-
-
+      {% render 'freilaender-cart-footer-extras', part: 'delivery' %}
 
       <div class="cart__blocks">
         {% for block in section.blocks %}
@@ -133,25 +108,8 @@
               </div>
             {%- else -%}
 
+              {% render 'freilaender-cart-footer-extras', part: 'shipping-bar' %}
 
-            {% assign show_placeholder = true %}
-    {% for item in cart.items %}
-      {% if item.product.handle == 'bio-thanksgiving-pute' or item.product.handle == 'bio-waldland-weihnachtspute-kellybronze' or item.product.handle == "bio-weihnachtsente" %}
-        {% assign show_placeholder = false %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-
-    {% if show_placeholder %}
-
-      
-
-      <div id='fsb_placeholder' style="padding-bottom: 3rem; position: relative; z-index: -1;"></div>
-
-
-
-    {% endif %}
-            
               <div class="cart__ctas" {{ block.shopify_attributes }}>
 
 

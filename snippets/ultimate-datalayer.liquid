@@ -45,7 +45,8 @@
 
           // mini cart button selector
           this.miniCartButton = [
-            'a[href="/cart"]', 
+            'a[href="/cart"]',
+            '#cart-icon-bubble',
           ];
           this.miniCartAppersOn = 'click';
 
@@ -63,8 +64,8 @@
             '.shopify-payment-button'
           ]
 
-          //Keep the value true if Add to Cart redirects to the cart page
-          this.isAddToCartRedirect = true;
+          //Keep the value false when using cart drawer (AJAX add to cart)
+          this.isAddToCartRedirect = false;
           
           // keep the value false if cart items increment/decrement/remove refresh page 
           this.isAjaxCartIncrementDecrement = false;
@@ -499,6 +500,15 @@
                     self.ecommerceDataLayer('view_cart', self.cart);
                   });
               })
+            });
+
+            document.addEventListener('cart-drawer:opened', () => {
+              fetch('/cart.js')
+                .then((response) => response.json())
+                .then((data) => {
+                  self.cart = data;
+                  self.ecommerceDataLayer('view_cart', self.cart);
+                });
             });
           }
         }

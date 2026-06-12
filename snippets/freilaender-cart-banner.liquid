@@ -1,0 +1,38 @@
+{% comment %}
+  Bio-Lammfleisch Hinweis-Banner im Warenkorb.
+  Verwendet in: cart-drawer, cart page (via custom-liquid / snippet)
+{% endcomment %}
+
+{% assign show_banner = false %}
+
+{% for item in cart.items %}
+  {% if item.product.tags contains 'Bio-Lammfleisch' %}
+    {% assign show_banner = true %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% if show_banner %}
+  <div class="freilaender-cart-banner{% if context == 'drawer' %} freilaender-cart-banner--drawer{% else %} page-width{% endif %}">
+    <strong>
+      Bitte wählen Sie einen Liefertermin. Die Lieferung Ihrer gesamten Bestellung erfolgt gesammelt zum gewählten Liefertermin des Bio-Lammfleisches.
+    </strong>
+  </div>
+{% endif %}
+
+<style>
+  .freilaender-cart-banner {
+    background: #2d6c2b;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .freilaender-cart-banner--drawer {
+    margin: 1rem 0 0;
+  }
+</style>

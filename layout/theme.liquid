@@ -583,31 +583,37 @@
       }
     }
 
-    // Klick-Überwachung (In den Warenkorb)
-    document.body.addEventListener('click', async function (event) {
-      if (event.target.matches('button[name="add"], input[name="add"]')) {
-        event.preventDefault();
-        const form = event.target.closest('form');
-        const productHandle = form.getAttribute('data-product-handle') 
-          || window.location.pathname.split('/').pop();
+    // AJAX-Requests /cart/add abfangen (Drawer + product-form)
+    function getProductHandleFromAddToCart() {
+      const activeForm = document.activeElement?.closest?.('form[data-type="add-to-cart-form"]');
+      const form = activeForm || document.querySelector('product-form form[data-type="add-to-cart-form"]');
 
-        if (await pruefeWarenkorb(productHandle)) {
-          form.submit();
-        }
+      if (form?.getAttribute('data-product-handle')) {
+        return form.getAttribute('data-product-handle');
       }
-    });
 
-    // AJAX-Requests /cart/add.js abfangen
+      if (window.location.pathname.includes('/products/')) {
+        return window.location.pathname.split('/').pop().split('?')[0];
+      }
+
+      return null;
+    }
+
     const originalFetch = window.fetch;
     window.fetch = async function (...args) {
-      if (args[0].includes('/cart/add.js')) {
-        const formData = args[1].body;
-        const productHandle = new URLSearchParams(formData).get('id');
+      let url = args[0];
+      if (url instanceof Request) {
+        url = url.url;
+      }
 
-        if (!(await pruefeWarenkorb(productHandle))) {
+      if (typeof url === 'string' && url.includes('/cart/add')) {
+        const productHandle = getProductHandleFromAddToCart();
+
+        if (productHandle && !(await pruefeWarenkorb(productHandle))) {
           return Promise.reject(new Error('Produkt kann nicht hinzugefügt werden'));
         }
       }
+
       return originalFetch.apply(this, args);
     };
   });
