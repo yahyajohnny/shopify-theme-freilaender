@@ -4,7 +4,7 @@
 {% endcomment %}
 
 {%- liquid
-  assign cross_sell_handles = 'bio-geflugel-pakete,bio-putenfleisch,bio-hahnchenfleisch,bio-wurstprodukte,bio-festtagsputen' | split: ','
+  assign cross_sell_handles = 'bio-geflugel-pakete,bio-putenfleisch,bio-hahnchenfleisch,bio-wurstprodukte' | split: ','
   assign cross_sell_count = 0
 
   for handle in cross_sell_handles
@@ -47,7 +47,7 @@
         {%- endfor -%}
       </ul>
 
-      {%- if cross_sell_count > 2 -%}
+      {%- if cross_sell_count > 1 -%}
         <div class="slider-buttons no-js-hidden">
           <button
             type="button"
