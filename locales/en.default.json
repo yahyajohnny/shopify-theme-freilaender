@@ -312,7 +312,9 @@
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Log in</a> to check out faster."
       },
       "note_title": "Order special instructions",
-      "note_hint": "No delivery notes here – you can add them at the shipping address."
+      "note_hint": "No delivery notes here – you can add them at the shipping address.",
+      "delivery_title": "Preferred delivery date (optional)",
+      "delivery_hint": "Shipping Tue–Fri, later date available on request"
     },
     "footer": {
       "payment": "Payment methods"
