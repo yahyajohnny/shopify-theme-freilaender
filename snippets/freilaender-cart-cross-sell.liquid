@@ -1,5 +1,5 @@
 {% comment %}
-  Cross-Sell Collections im Warenkorb (gleiche Auswahl wie cart.json).
+  Cross-Sell Collections im Warenkorb-Drawer.
   context: 'drawer'
 {% endcomment %}
 
@@ -19,64 +19,29 @@
   <div class="freilaender-cart-cross-sell{% if context == 'drawer' %} freilaender-cart-cross-sell--drawer{% endif %}">
     <h3 class="freilaender-cart-cross-sell__title">Das könnte dir auch gefallen</h3>
 
-    <slider-component class="freilaender-cart-cross-sell__slider slider-mobile-gutter">
-      <ul
-        class="collection-list contains-card contains-card--collection{% if settings.card_style == 'standard' %} contains-card--standard{% endif %} grid slider slider--tablet grid--peek collection-list--{{ cross_sell_count }}-items"
-        id="Freilaender-CartCrossSell"
-        role="list"
-      >
-        {%- assign item_index = 0 -%}
-        {%- for handle in cross_sell_handles -%}
-          {%- assign cross_sell_collection = collections[handle] -%}
-          {%- if cross_sell_collection != blank -%}
-            {%- assign item_index = item_index | plus: 1 -%}
-            {%- assign placeholder_image_index = item_index | minus: 1 | modulo: 4 | plus: 1 -%}
-            {%- assign placeholder_image = 'collection-apparel-' | append: placeholder_image_index -%}
-            <li
-              id="Freilaender-CartCrossSell-{{ item_index }}"
-              class="collection-list__item grid__item slider__slide{% if cross_sell_collection.featured_image == nil %} collection-list__item--no-media{% endif %}"
-            >
-              {% render 'card-collection',
-                card_collection: cross_sell_collection,
-                media_aspect_ratio: 'square',
-                columns: 2,
-                placeholder_image: placeholder_image
-              %}
-            </li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
-
-      {%- if cross_sell_count > 1 -%}
-        <div class="slider-buttons no-js-hidden">
-          <button
-            type="button"
-            class="slider-button slider-button--prev"
-            name="previous"
-            aria-label="{{ 'general.slider.previous_slide' | t }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
-          </button>
-          <div class="slider-counter caption">
-            <span class="slider-counter--current">1</span>
-            <span aria-hidden="true"> / </span>
-            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
-            <span class="slider-counter--total">{{ cross_sell_count }}</span>
-          </div>
-          <button
-            type="button"
-            class="slider-button slider-button--next"
-            name="next"
-            aria-label="{{ 'general.slider.next_slide' | t }}"
-          >
-            <span class="svg-wrapper">
-              {{- 'icon-caret.svg' | inline_asset_content -}}
-            </span>
-          </button>
-        </div>
-      {%- endif -%}
-    </slider-component>
+    <ul class="freilaender-cart-cross-sell__grid" role="list">
+      {%- for handle in cross_sell_handles -%}
+        {%- assign cross_sell_collection = collections[handle] -%}
+        {%- if cross_sell_collection != blank -%}
+          <li class="freilaender-cart-cross-sell__grid-item">
+            <a href="{{ cross_sell_collection.url }}" class="freilaender-cart-cross-sell__link">
+              {%- if cross_sell_collection.featured_image -%}
+                <img
+                  class="freilaender-cart-cross-sell__image"
+                  src="{{ cross_sell_collection.featured_image | image_url: width: 160 }}"
+                  alt="{{ cross_sell_collection.featured_image.alt | escape }}"
+                  width="80"
+                  height="80"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <span class="freilaender-cart-cross-sell__image freilaender-cart-cross-sell__image--placeholder"></span>
+              {%- endif -%}
+              <span class="freilaender-cart-cross-sell__name">{{ cross_sell_collection.title | escape }}</span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
   </div>
 {%- endif -%}
