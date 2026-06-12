@@ -199,6 +199,12 @@ cart-items {
   padding: 1rem 1.2rem;
 }
 
+.freilaender-cart-option-card--page .cart__note .field__input:focus,
+.freilaender-cart-option-card--page .cart__note .field__input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.1rem #2d6c2b;
+}
+
 .freilaender-cart-option-card--page .freilaender-cart-note-label__title,
 .freilaender-cart-option-card--page .freilaender-cart-option-card__title {
   font-size: 1.4rem;
