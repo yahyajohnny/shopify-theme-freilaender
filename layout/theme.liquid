@@ -524,24 +524,57 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // JavaScript-Arrays: exklusiveProdukte + ausnahmeProdukte
-    let exklusiveProdukte = [
-      {{ stringArrayExklusiv }}
-    ];
+    const exklusiveProdukte = [{{ stringArrayExklusiv }}];
+    const ausnahmeProdukte = [{{ stringArrayAusnahmen }}];
 
-    let ausnahmeProdukte = [
-      {{ stringArrayAusnahmen }}
-    ];
+    const MSG_EXCLUSIVE_IN_CART =
+      'Du hast bereits ein exklusives Produkt im Warenkorb. Aus logistischen Gründen können leider keine weiteren Artikel dazu bestellt werden. Bitte lege für weitere Produkte eine neue Bestellung an. Vielen Dank für Dein Verständnis!';
 
-    console.log("Exklusive Produkte (JS):", exklusiveProdukte);
-    console.log("Ausnahme-Produkte (JS):", ausnahmeProdukte);
+    const MSG_ADD_EXCLUSIVE_TO_MIXED =
+      'Du kannst keine Bio-Festtagspute zu deinem Warenkorb hinzufügen, da sich bereits andere Produkte darin befinden. Aus logistischen Gründen können leider keine weiteren Artikel dazu bestellt werden. Bitte lege für weitere Produkte eine neue Bestellung an. Vielen Dank für Dein Verständnis!';
 
-    // Wir ersetzen erlaubteAusnahmen jetzt durch ausnahmeProdukte
     function istExklusivesProdukt(handle) {
       return exklusiveProdukte.includes(handle);
     }
+
     function istAusnahmeProdukt(handle) {
       return ausnahmeProdukte.includes(handle);
+    }
+
+    function leereWarenkorbFehler() {
+      const drawerError = document.getElementById('Freilaender-CartExclusive-Error');
+      const pageError = document.getElementById('cart-errors');
+
+      if (drawerError) {
+        drawerError.textContent = '';
+        drawerError.hidden = true;
+      }
+
+      if (pageError) {
+        pageError.textContent = '';
+      }
+    }
+
+    function zeigeWarenkorbFehler(nachricht) {
+      const cartDrawer = document.querySelector('cart-drawer');
+
+      if (cartDrawer) {
+        const drawerError = document.getElementById('Freilaender-CartExclusive-Error');
+        if (drawerError) {
+          drawerError.textContent = nachricht;
+          drawerError.hidden = false;
+        }
+
+        if (typeof cartDrawer.open === 'function') {
+          const cartLink = document.querySelector('#cart-icon-bubble');
+          cartDrawer.open(cartLink || undefined);
+        }
+      } else {
+        const pageError = document.getElementById('cart-errors');
+        if (pageError) {
+          pageError.textContent = nachricht;
+        }
+      }
     }
 
     async function pruefeWarenkorb(neuesProduktHandle) {
@@ -551,40 +584,35 @@
         const warenkorbItems = warenkorb.items;
 
         if (warenkorbItems.length > 0) {
-          const exklusivesProduktImWarenkorb = warenkorbItems.find(item => istExklusivesProdukt(item.handle));
+          const exklusivesProduktImWarenkorb = warenkorbItems.find((item) => istExklusivesProdukt(item.handle));
           const neuesProduktIstExklusiv = istExklusivesProdukt(neuesProduktHandle);
           const neuesProduktIstAusnahme = istAusnahmeProdukt(neuesProduktHandle);
-          const ausnahmenImWarenkorb = warenkorbItems.filter(item => istAusnahmeProdukt(item.handle)).length;
+          const ausnahmenImWarenkorb = warenkorbItems.filter((item) => istAusnahmeProdukt(item.handle)).length;
 
-          // 1) Bereits exklusives Produkt im Warenkorb + neues, nicht-ausnahme Produkt?
           if (
             exklusivesProduktImWarenkorb &&
             neuesProduktHandle !== exklusivesProduktImWarenkorb.handle &&
             !neuesProduktIstAusnahme
           ) {
-            alert('Du hast bereits ein exklusives Produkt im Warenkorb. Aus logistischen Gründen können leider keine weiteren Artikel dazu bestellt werden. Bitte lege für weitere Produkte eine neue Bestellung an. Vielen Dank für Dein Verständnis!');
-            return false;
+            return { ok: false, message: MSG_EXCLUSIVE_IN_CART };
           }
 
-          // 2) Versuche exklusives Produkt hinzuzufügen, während schon andere (normale) Produkte da sind?
           if (
             !exklusivesProduktImWarenkorb &&
             neuesProduktIstExklusiv &&
             warenkorbItems.length > ausnahmenImWarenkorb
           ) {
-            alert('Du kannst keine Bio-Festtagspute zu deinem Warenkorb hinzufügen, da sich bereits andere Produkte darin befinden. Aus logistischen Gründen können leider keine weiteren Artikel dazu bestellt werden. Bitte lege für weitere Produkte eine neue Bestellung an. Vielen Dank für Dein Verständnis!');
-            return false;
+            return { ok: false, message: MSG_ADD_EXCLUSIVE_TO_MIXED };
           }
         }
 
-        return true;
+        return { ok: true };
       } catch (error) {
         console.error('Fehler beim Prüfen des Warenkorbs:', error);
-        return false;
+        return { ok: false, message: 'Der Warenkorb konnte nicht geprüft werden. Bitte versuche es erneut.' };
       }
     }
 
-    // AJAX-Requests /cart/add abfangen (Drawer + product-form)
     function getProductHandleFromAddToCart() {
       const activeForm = document.activeElement?.closest?.('form[data-type="add-to-cart-form"]');
       const form = activeForm || document.querySelector('product-form form[data-type="add-to-cart-form"]');
@@ -609,13 +637,21 @@
 
       if (typeof url === 'string' && url.includes('/cart/add')) {
         const productHandle = getProductHandleFromAddToCart();
+        const pruefung = productHandle ? await pruefeWarenkorb(productHandle) : { ok: true };
 
-        if (productHandle && !(await pruefeWarenkorb(productHandle))) {
+        if (!pruefung.ok) {
+          zeigeWarenkorbFehler(pruefung.message);
           return Promise.reject(new Error('Produkt kann nicht hinzugefügt werden'));
         }
       }
 
-      return originalFetch.apply(this, args);
+      const response = await originalFetch.apply(this, args);
+
+      if (typeof url === 'string' && url.includes('/cart/add') && response.ok) {
+        leereWarenkorbFehler();
+      }
+
+      return response;
     };
   });
 </script>

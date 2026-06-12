@@ -84,6 +84,23 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   flex-shrink: 0;
 }
 
+.freilaender-cart-exclusive-error {
+  display: block;
+  flex-shrink: 0;
+  margin: 0 0 1rem;
+  padding: 1.2rem 1.4rem;
+  border: 0.1rem solid #8a1717;
+  border-radius: 0.4rem;
+  background-color: rgba(138, 23, 23, 0.06);
+  color: #8a1717;
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.freilaender-cart-exclusive-error[hidden] {
+  display: none !important;
+}
+
 .drawer__close {
   display: inline-block;
   padding: 0;
