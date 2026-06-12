@@ -1,0 +1,132 @@
+{% comment %}
+  Go-Express-Zustimmung: Checkbox für Weitergabe von Telefon und E-Mail.
+  context: 'drawer' | 'page'
+{% endcomment %}
+
+{%- liquid
+  if context == 'drawer'
+    assign consent_id = 'go-express-consent-drawer'
+    assign toast_id = 'consent-toast-drawer'
+    assign form_id = 'CartDrawer-Form'
+    assign checkbox_modifier = ' cart__checkbox--drawer'
+  else
+    assign consent_id = 'go-express-consent'
+    assign toast_id = 'consent-toast'
+    assign form_id = 'cart'
+    assign checkbox_modifier = ''
+  endif
+
+  assign go_express_checked = true
+  if cart.attributes.go_express_zustimmung != blank and cart.attributes.go_express_zustimmung != 'ja'
+    assign go_express_checked = false
+  endif
+-%}
+
+<go-express-consent
+  class="cart__checkbox{{ checkbox_modifier }}"
+  data-form-id="{{ form_id }}"
+  data-toast-id="{{ toast_id }}"
+>
+  <label for="{{ consent_id }}">
+    <input
+      id="{{ consent_id }}"
+      type="checkbox"
+      name="attributes[go_express_zustimmung]"
+      value="ja"
+      {% if go_express_checked %}
+        checked
+      {% endif %}
+      {% if context == 'drawer' %}
+        form="{{ form_id }}"
+      {% endif %}
+    >
+    Ich stimme der Weitergabe meiner Telefonnummer und E-Mail-Adresse an Go Express zu.
+  </label>
+  <p class="consent-inline-hint" hidden>
+    Ohne Zustimmung gibt es keine Sendungsverfolgung.
+  </p>
+</go-express-consent>
+
+<div id="{{ toast_id }}" class="consent-toast" role="status" aria-live="polite" hidden>
+  Ohne Zustimmung gibt es keine Sendungsverfolgung.
+</div>
+
+<style>
+  .cart__checkbox {
+    width: 100%;
+    margin: 1rem 0 20px 0;
+    padding: 15px;
+    border: 2px solid #0f2b0e;
+    border-radius: 8px;
+    background-color: #f6f8f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    margin-left: auto;
+    margin-top: 2rem;
+  }
+
+  .cart__checkbox--drawer {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+
+  .cart__checkbox:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cart__checkbox label {
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .cart__checkbox input[type='checkbox'] {
+    flex-shrink: 0;
+    margin-right: 12px;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #0f2b0e;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .cart__checkbox input[type='checkbox']:checked {
+    background-color: #0f2b0e;
+    position: relative;
+  }
+
+  .cart__checkbox input[type='checkbox']:checked::after {
+    content: '\2714';
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .consent-toast {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    background: #0f2b0e;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    z-index: 9999;
+    max-width: 280px;
+  }
+
+  .consent-inline-hint {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #8a1717;
+  }
+</style>
