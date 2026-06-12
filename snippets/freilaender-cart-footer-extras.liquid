@@ -13,21 +13,7 @@
     {% endif %}
   {% endfor %}
 
-  <div class="delivery_date_picker_container">
-    <style>
-      .bcdp-methods-container {
-        display: none;
-      }
-    </style>
-
-    {% unless has_festtags %}
-      <h4 class="freilaender-cart-footer-extras__heading">Wunschlieferdatum (optional)</h4>
-      <p class="freilaender-cart-footer-extras__text">
-        Wir versenden täglich von Dienstag bis Freitag, damit Sie Ihre Ware schnellstmöglich erhalten.
-        Sie wünschen ein späteres Lieferdatum? Wählen Sie einen Wunschtermin ... <sup>(optional)</sup>
-      </p>
-    {% endunless %}
-
+  {% unless has_festtags %}
     {%- liquid
       assign show_bird_widget = false
       if context == 'drawer' and template.name != 'cart'
@@ -35,17 +21,47 @@
       elsif context != 'drawer' and template.name == 'cart'
         assign show_bird_widget = true
       endif
+
+      if context == 'drawer'
+        assign delivery_accordion_id = 'Details-Wunschlieferdatum-Drawer'
+      else
+        assign delivery_accordion_id = 'Details-Wunschlieferdatum-Cart'
+      endif
     -%}
 
-    {% if show_bird_widget %}
-      <div
-        id="birdchime-slots-box"
-        {% if context == 'drawer' %}
-          data-watch-ajax="cart-drawer-items"
-        {% endif %}
-      ></div>
-    {% endif %}
-  </div>
+    <div class="delivery_date_picker_container freilaender-delivery-accordion-wrapper">
+      <style>
+        .bcdp-methods-container {
+          display: none;
+        }
+      </style>
+
+      <details id="{{ delivery_accordion_id }}" class="freilaender-delivery-accordion">
+        <summary>
+          <span class="summary__title">
+            Wunschlieferdatum (optional)
+            {{- 'icon-caret.svg' | inline_asset_content -}}
+          </span>
+        </summary>
+
+        <div class="freilaender-delivery-accordion__content">
+          <p class="freilaender-cart-footer-extras__text">
+            Wir versenden täglich von Dienstag bis Freitag, damit Sie Ihre Ware schnellstmöglich erhalten.
+            Sie wünschen ein späteres Lieferdatum? Wählen Sie einen Wunschtermin ... <sup>(optional)</sup>
+          </p>
+
+          {% if show_bird_widget %}
+            <div
+              id="birdchime-slots-box"
+              {% if context == 'drawer' %}
+                data-watch-ajax="cart-drawer-items"
+              {% endif %}
+            ></div>
+          {% endif %}
+        </div>
+      </details>
+    </div>
+  {% endunless %}
 {% endunless %}
 
 {% unless part == 'delivery' %}
@@ -64,14 +80,53 @@
 
 {% if part == blank or part == 'delivery' %}
   <style>
-    .freilaender-cart-footer-extras__heading {
-      margin: 0 0 0.5rem;
+    .freilaender-delivery-accordion {
+      border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
+    }
+
+    .freilaender-delivery-accordion summary {
+      display: flex;
+      position: relative;
+      line-height: 1;
+      padding: 1.5rem 2.8rem 1.5rem 0;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .freilaender-delivery-accordion summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .freilaender-delivery-accordion .summary__title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
       font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .freilaender-delivery-accordion .summary__title .icon-caret {
+      height: 0.6rem;
+      transition: transform var(--duration-short) ease;
+    }
+
+    .freilaender-delivery-accordion[open] > summary .icon-caret {
+      transform: rotate(180deg);
+    }
+
+    .freilaender-delivery-accordion[open] {
+      padding-bottom: 1.5rem;
+    }
+
+    .freilaender-delivery-accordion__content {
+      padding-top: 0.25rem;
     }
 
     .freilaender-cart-footer-extras__text {
       font-size: 14px;
       margin: 0 0 1rem;
+      line-height: 1.5;
     }
   </style>
 {% endif %}
